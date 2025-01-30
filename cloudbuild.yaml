@@ -1,0 +1,18 @@
+steps:
+- name: 'python:3.9'
+  entrypoint: pip
+  args: ['install', '-r', 'requirements.txt']
+
+- name: 'python:3.9'
+  entrypoint: python
+  args: ['pipeline.py']  # Your compilation script
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    curl -X POST \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -F "pipeline=@pipeline.yaml" \
+    https://us-central1-kfp.pkg.dev/learn-vertex-pipelines/kubeflow/my-pipeline

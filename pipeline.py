@@ -31,7 +31,7 @@ def evaluate_model(accuracy: float) -> str:
     return f"Model evaluation {result} with accuracy {accuracy:.2f}"
 
 
-# Define the pipeline
+# Define the tutorial pipeline
 @dsl.pipeline(
     name="Tutorial Pipeline",
     description="A simple pipeline for learning KFP basics",
